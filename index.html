@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Store</title>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: #080808;
+        color: white;
+        min-height: 100vh;
+    }
+
+    header {
+        padding: 25px 8%;
+        border-bottom: 1px solid #222;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 25px;
+        font-weight: 800;
+    }
+
+    .logo span {
+        color: #ff3b3b;
+    }
+
+    .hero {
+        text-align: center;
+        padding: 80px 20px 50px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+        margin-bottom: 15px;
+    }
+
+    .hero p {
+        color: #999;
+        font-size: 18px;
+    }
+
+    .products {
+        max-width: 1100px;
+        margin: auto;
+        padding: 30px 20px 80px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 25px;
+    }
+
+    .card {
+        background: #111;
+        border: 1px solid #242424;
+        border-radius: 18px;
+        overflow: hidden;
+        transition: 0.25s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        border-color: #ff3b3b;
+    }
+
+    .product-image {
+        height: 180px;
+        background: linear-gradient(135deg, #191919, #292929);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 55px;
+    }
+
+    .content {
+        padding: 22px;
+    }
+
+    .content h2 {
+        margin-bottom: 8px;
+    }
+
+    .description {
+        color: #999;
+        line-height: 1.5;
+        margin-bottom: 18px;
+    }
+
+    .price {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 18px;
+    }
+
+    .buy-btn {
+        width: 100%;
+        border: none;
+        padding: 14px;
+        border-radius: 10px;
+        background: #ff3b3b;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .buy-btn:hover {
+        background: #ff5555;
+        transform: scale(1.02);
+    }
+
+    footer {
+        text-align: center;
+        padding: 30px;
+        border-top: 1px solid #222;
+        color: #666;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">MY<span>STORE</span></div>
+    <div>🛒 Store</div>
+</header>
+
+<section class="hero">
+    <h1>Welcome to My Store</h1>
+    <p>Digital products, games and more.</p>
+</section>
+
+<section class="products">
+
+    <div class="card">
+
+        <div class="product-image">
+            🎮
+        </div>
+
+        <div class="content">
+
+            <h2>Minecraft World</h2>
+
+            <p class="description">
+                A custom Minecraft world ready to download and play.
+            </p>
+
+            <div class="price">
+                ₹99
+            </div>
+
+            <button class="buy-btn" onclick="buyProduct()">
+                Buy Now
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    © 2026 My Store
+</footer>
+
+
+<script>
+
+function buyProduct() {
+
+    // DEMO ONLY
+    // Replace this with an order created by your backend.
+
+    const options = {
+
+        key: "YOUR_RAZORPAY_KEY_ID",
+
+        amount: 9900, // ₹99 = 9900 paise
+
+        currency: "INR",
+
+        name: "My Store",
+
+        description: "Minecraft World",
+
+        image: "https://yourwebsite.com/logo.png",
+
+        handler: function(response) {
+
+            alert(
+                "Payment completed!\n\nPayment ID: " +
+                response.razorpay_payment_id
+            );
+
+            // IMPORTANT:
+            // Your backend should verify the payment
+            // before delivering the product.
+        },
+
+        prefill: {
+            name: "",
+            email: "",
+            contact: ""
+        },
+
+        theme: {
+            color: "#ff3b3b"
+        }
+
+    };
+
+    const razorpay = new Razorpay(options);
+
+    razorpay.open();
+}
+
+</script>
+
+</body>
+</html>
